@@ -22,4 +22,5 @@ public class Order {
     private Long oid;//订单主键
     private Integer uid;//用户ID
     private String username;//用户名
+    private Integer pid;//商品ID
 }
