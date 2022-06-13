@@ -56,6 +56,7 @@ public class SentinelController {
 
     int i =0 ;
 
+
     @RequestMapping("/order/msg6")
     public String message6(){
         i++;
