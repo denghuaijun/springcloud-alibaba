@@ -23,4 +23,5 @@ public class Order {
     private Integer uid;//用户ID
     private String username;//用户名
     private Integer pid;//商品ID
+    private String pname;//商品名称
 }

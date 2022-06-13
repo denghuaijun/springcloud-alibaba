@@ -149,11 +149,17 @@ public class OrderController {
         //获取商品服务的服务示例
         String serviceName ="service-product";
         Product product =feginSevice.getProduct(pid);
+        if (product.getPid() ==-1){
+            Order order = new Order();
+            order.setPname("下单失败！");
+            return order;
+        }
         log.info("》》》客户下单，这时候调用商品微服务查询商品信息:{}", JSON.toJSONString(product));
         Order order = new Order();
         order.setUid(1);
         order.setUsername("test-fegin");
         order.setPid(product.getPid());
+        order.setPname(product.getPname());
         orderService.save(order);
         return order;
     }
