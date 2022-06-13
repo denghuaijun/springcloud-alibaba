@@ -7,7 +7,7 @@ spring:
     name: service-order
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.105.16:13307/my_test?createDatabaseIfNotExist=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.200.134:13306/my_test?createDatabaseIfNotExist=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
     password: EverSecHengAn123!@#
   jpa:
@@ -26,6 +26,13 @@ spring:
       discovery:
         server-addr: localhost:8848
 
+
+    sentinel:
+      transport:
+        port: 9999 #跟控制台交流的端口，随意指定一个未使用的端口即可
+        dashboard: localhost:8080 #指定sentinel控制台的服务地址
+      filter:
+        enabled: false #禁止收敛URL入口context，不然流控的链路控制不生效，SCA 2.1.2版本之后使用spring.cloud.sentinel.web-context-unify=false来关闭，之前需要自己写代码过滤器实现
 # ribbon负载均衡策略
 service-product:
   ribbon:
