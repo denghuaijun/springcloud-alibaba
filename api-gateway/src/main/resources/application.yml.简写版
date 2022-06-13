@@ -1,0 +1,14 @@
+server:
+  port: 7000
+spring:
+  application:
+    name: api-gateway
+    # 简写版http://192.168.50.18:7000/service-product/product/1 直接使用网关地址+微服务名+请求路径即可
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+    nacos:
+      discovery:
+        server-addr: localhost:8848

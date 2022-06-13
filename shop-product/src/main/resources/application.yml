@@ -5,7 +5,7 @@ spring:
     name: service-product
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.105.16:13307/my_test?createDatabaseIfNotExist=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.200.134:13306/my_test?createDatabaseIfNotExist=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
     password: EverSecHengAn123!@#
   jpa:

@@ -1,0 +1,31 @@
+server:
+  port: 7000
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    # gateway的基本使用配置（基础版）
+    gateway:
+      routes: #路由数组
+        - id: product-route  #当前路由表示ID，要求唯一
+          uri: http://localhost:8081 #匹配后请求转发的地址
+          order: 1 # 路由优先级，数字越低优先级越高
+          predicates: # 断言 （路由转发要满足的条件）
+            - Path=/product-service/** # 当请求路径满足path指定的规则时，才进行路由转发
+         #filters: #过滤器，请求再传递过程中可以通过过滤器进行一定的修改
+         #  - StripPrefix=1 #转发之前去掉1层路径
+    # 使用注册的服务名来发现服务(增强版)
+#    nacos:
+#      discovery:
+#        server-addr: localhost:8848
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true #让gateway可以发现nacos中的微服务
+#      routes:
+#        - id: product_route
+#          uri: lb://service-product # lb指的是从nacos中按照名称获取微服务，并遵循负载均衡策略
+#          predicates:
+#            - Path=/product-service/**
+#      filter:
+#        - StripPrefix=1
