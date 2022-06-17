@@ -3,6 +3,21 @@ server:
 spring:
   application:
     name: api-gateway
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.200.134:13306/my_test?createDatabaseIfNotExist=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: EverSecHengAn123!@#
+  jpa:
+    show-sql: true # 默认false，在日志里显示执行的sql语句
+    hibernate:
+      ddl-auto: update #指定为update，每次启动项目检测表结构有变化的时候会新增字段，表不存在时会 新建，如果指定create，则每次启动项目都会清空数据并删除表，再新建
+        #naming:
+      #指定jpa的自动表生成策略，驼峰自动映射为下划线格式7
+      #   implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+      #physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   cloud:
     gateway:
       discovery:
@@ -13,6 +28,7 @@ spring:
           uri: lb://service-product
           predicates:
             - Path=/product-service/**
+            - Age=18,60 #限制年龄只有18到60岁的人能访问
           filters:
             - StripPrefix=1
     nacos:
