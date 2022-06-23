@@ -22,15 +22,16 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
-      routes:
-        - id: product-route
+          enabled: true # 启用探测器，让gateway可以发现nacos中的微服务
+      routes: # 路由数组（路由：就是当指定请求满足什么条件的时候，转发到哪个微服务
+        - id: product-route # 当前路由表示，要求唯一，默认UUID
           uri: lb://service-product
-          predicates:
-            - Path=/product-service/**
+          order: 1 # 路由的优先级，数字越小级别越高
+          predicates: # 断言（就是路由转发要满足的条件）
+            - Path=/product-service/** # 当请求路径满足Path指定的规则时，才进行路由转发
             - Age=18,60 #限制年龄只有18到60岁的人能访问
-          filters:
-            - StripPrefix=1
+          filters: # 过滤器，请求在传递过程中可以通过过滤器对其进行一定的修改
+            - StripPrefix=1 # 转发之前去掉1层路径
     nacos:
       discovery:
         server-addr: localhost:8848

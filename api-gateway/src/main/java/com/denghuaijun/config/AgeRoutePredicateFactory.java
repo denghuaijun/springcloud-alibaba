@@ -1,68 +1,61 @@
 package com.denghuaijun.config;
-
+ 
 import lombok.Data;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.gateway.handler.predicate.AbstractRoutePredicateFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
-
-import java.time.LocalDateTime;
+ 
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * AgeRoutePredicateFactory
- *
- * @author denghuaijun@eversec.cn
- * @date 2022/6/13 18:39
- * @Description 自定义一个断言工厂类 实现只有18-60岁的人可以访问
+ * 自定义断言年龄入参
  */
 @Component
 public class AgeRoutePredicateFactory extends AbstractRoutePredicateFactory<AgeRoutePredicateFactory.Config> {
-
-    public AgeRoutePredicateFactory(Class<Config> configClass) {
-        super(configClass);
-    }
-
+ 
     public AgeRoutePredicateFactory() {
         super(AgeRoutePredicateFactory.Config.class);
+ 
     }
-
+ 
+    // 将配置文件中的值按返回集合的顺序，赋值给配置类
+    @Override
+    public List<String> shortcutFieldOrder() {
+        return Arrays.asList(new String[] {"minAge", "maxAge"});
+    }
+ 
+    // 断言
     @Override
     public Predicate<ServerWebExchange> apply(AgeRoutePredicateFactory.Config config) {
-        return new Predicate<ServerWebExchange>() {
-            @Override
-            public boolean test(ServerWebExchange serverWebExchange) {
-                //从serverWebExchange获取传入的参数
-                String ageStr = serverWebExchange.getRequest().getQueryParams().getFirst("age");
-                if (StringUtils.isNotEmpty(ageStr)){
-                    int age = Integer.parseInt(ageStr);
-                    return age > config.getMinAge() && age < config.getMaxAge();
-                }
+ 
+        return (ServerWebExchange serverWebExchange)->{
+            // TODO 获取请求参数age，判断是否满足[18, 60)
+            String age = serverWebExchange.getRequest().getQueryParams().getFirst("age");
+            if (StringUtils.isEmpty(age)) {
+                return false;
+            }
+ 
+            if (!age.matches("[0-9]+")) {
+                return false;
+            }
+ 
+            int iAge = Integer.parseInt(age);
+ 
+            if (iAge >= config.minAge && iAge < config.maxAge) {
                 return true;
+            } else {
+                return false;
             }
         };
     }
-    //用于从配置文件中回去参数值赋值到配置类中的属性
-    @Override
-    public List<String> shortcutFieldOrder() {
-        //这里属性的顺序要跟配置文件中参数对应值的顺序一致
-        return Arrays.asList("minAge","maxAge");
-    }
-    //自定义配置类用于接受配置文件的参数
+ 
+    // 配置类，属性用于接收配置文件中的值
     @Data
-    class Config{
-
+    public static class Config {
         private int minAge;
         private int maxAge;
-
-    }
-
-    public static void main(String[] args) {
-        long l = 1655133856000L;
-        System.out.println(LocalDateTime.now());
     }
 }
-
-
