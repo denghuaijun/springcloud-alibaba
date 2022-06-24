@@ -32,6 +32,8 @@ spring:
             - Age=18,60 #限制年龄只有18到60岁的人能访问
           filters: # 过滤器，请求在传递过程中可以通过过滤器对其进行一定的修改
             - StripPrefix=1 # 转发之前去掉1层路径
+            - Log=true,false #控制日志是否开启,自定义过滤器
+            - RedirectTo=302,https://www.baidu.com # 内置局部过滤器，将原始请求重定向到指定URL及http状态码
     nacos:
       discovery:
         server-addr: localhost:8848

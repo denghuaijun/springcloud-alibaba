@@ -1,11 +1,11 @@
 package com.denghuaijun.config;
- 
+
 import lombok.Data;
 import org.springframework.cloud.gateway.handler.predicate.AbstractRoutePredicateFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
- 
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
