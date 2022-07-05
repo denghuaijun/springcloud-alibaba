@@ -12,6 +12,7 @@ import java.util.function.Predicate;
 
 /**
  * 自定义断言年龄入参
+ * http://localhost:7000/product-service/product/1?age=30
  */
 @Component
 public class AgeRoutePredicateFactory extends AbstractRoutePredicateFactory<AgeRoutePredicateFactory.Config> {
