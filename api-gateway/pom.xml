@@ -27,6 +27,11 @@
             <artifactId>shop-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!--sentinel 提供了Spring cloud gateway 的适配模块 -->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-spring-cloud-gateway-adapter</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
