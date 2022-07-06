@@ -5,7 +5,7 @@ spring:
     name: service-product
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.200.134:13306/my_test?createDatabaseIfNotExist=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.201.52:13306/my_test?createDatabaseIfNotExist=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
     password: EverSecHengAn123!@#
   jpa:
@@ -24,3 +24,10 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+
+  zipkin:
+    base-url: http://localhost:9411/ #zipkin server的请求地址
+    discovery-client-enabled: false #让nacos把它当成一个url而不是一个服务
+  sleuth:
+    sampler:
+      probability: 1.0 #采样的百分比

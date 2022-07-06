@@ -5,7 +5,7 @@ spring:
     name: api-gateway
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.200.134:13306/my_test?createDatabaseIfNotExist=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.201.52:13306/my_test?createDatabaseIfNotExist=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
     password: EverSecHengAn123!@#
   jpa:
@@ -34,6 +34,20 @@ spring:
             - StripPrefix=1 # 转发之前去掉1层路径
             - Log=true,false #控制日志是否开启,自定义过滤器
             - RedirectTo=302,https://www.baidu.com # 内置局部过滤器，将原始请求重定向到指定URL及http状态码
+        - id: order-route  # 测试zipkin http://localhost:7000/order-serv/getDisCovery/fegin/1?token=123
+          uri: lb://service-order
+          order: 1
+          predicates:
+            - Path=/order-serv/**
+          filters:
+            - StripPrefix=1
     nacos:
       discovery:
         server-addr: localhost:8848
+
+  zipkin:
+    base-url: http://localhost:9411/ #zipkin server的请求地址
+    discovery-client-enabled: false #让nacos把它当成一个url而不是一个服务
+  sleuth:
+    sampler:
+      probability: 1.0 #采样的百分比
