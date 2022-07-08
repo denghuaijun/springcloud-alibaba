@@ -5,7 +5,7 @@ spring:
     name: service-user
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.201.52:13307/my_test?createDatabaseIfNotExist=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.201.52:13306/my_test?createDatabaseIfNotExist=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
     password: EverSecHengAn123!@#
   jpa:
@@ -25,3 +25,12 @@ spring:
   sleuth:
     sampler:
       probability: 1.0 #采样的百分比
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+# rocketmq配置
+rocketmq:
+  name-server: 192.168.201.52:9876

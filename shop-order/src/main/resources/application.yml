@@ -52,3 +52,8 @@ service-product:
 feign:
   sentinel:
     enabled: true #开启fegin对sentinel的支持
+# rocketmq配置
+rocketmq:
+  name-server: 192.168.201.52:9876
+  producer:
+    group: shop-order
