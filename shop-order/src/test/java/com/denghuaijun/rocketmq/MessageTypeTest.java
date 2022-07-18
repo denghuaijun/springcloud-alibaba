@@ -70,4 +70,10 @@ public class MessageTypeTest {
         rocketMQTemplate.sendOneWay("test-one-topic", "这是一条单向消息");
 
     }
+
+    //同步顺序消息【异步顺序，单向顺序写法类似】
+    public void testSyncSendOrderly(){
+        //第三个参数用于队列选择
+        rocketMQTemplate.syncSendOrderly("test-order-topic","这是一条同步顺序消息","xxx");
+    }
 }
