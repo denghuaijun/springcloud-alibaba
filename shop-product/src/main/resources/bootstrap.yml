@@ -8,5 +8,10 @@ spring:
         file-extension: yaml
         shared-dataids: all-service.yaml # 配置要引入的全局配置
         refreshable-dataids: all-service.yaml #配置要实现动态刷新的配置
+        namespace: public
+        group: SEATA_GROUP
+    alibaba:
+      seata:
+        tx-service-group: ${spring.application.name}
   profiles:
     active: test

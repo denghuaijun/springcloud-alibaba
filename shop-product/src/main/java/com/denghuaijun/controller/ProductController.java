@@ -34,6 +34,11 @@ public class ProductController {
         return product;
     }
 
+    @GetMapping("/product/reduceInventory")
+    public void reduceInventory(Integer pid,Integer num){
+        productService.reduceInventory(pid,num);
+    }
+
     /**
      * 硬编码方式动态读取nacos配置
      * @return

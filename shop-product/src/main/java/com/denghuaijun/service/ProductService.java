@@ -11,4 +11,6 @@ import com.denghuaijun.entity.Product;
  */
 public interface ProductService {
     Product findByPid(Integer id);
+
+    void reduceInventory(Integer pid, Integer num);
 }

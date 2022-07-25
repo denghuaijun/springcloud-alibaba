@@ -21,4 +21,9 @@ public class ProductServiceFallBack implements ProductFeginSevice {
       product.setPid(-1);
         return product;
     }
+
+    @Override
+    public void reduceInventory(Integer pid, Integer number) {
+        log.error("调用商品服务扣减库存发生异常");
+    }
 }

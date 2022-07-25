@@ -12,4 +12,8 @@ import com.denghuaijun.entity.Order;
 public interface OrderService {
 
     public void save(Order order);
+
+    //创建订单然后在扣减库存
+    public Order createOrder(Integer pid);
+
 }
