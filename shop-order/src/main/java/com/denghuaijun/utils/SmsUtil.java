@@ -26,9 +26,9 @@ public class SmsUtil {
     //产品域名
     private static String domain ="dysmsapi.aliyuncs.com";
 
-    private static String accessKeyId="LTAI5t7z57nciYwxNyw7pM6o";
+    private static String accessKeyId="xxxx";
 
-    private static String accessKeySecret="QFK362QYl1qC7K3mJVFlZJZLMbVTis";
+    private static String accessKeySecret="xxxxxx";
     //短信发送
     public static SendSmsResponse sendSms() throws ClientException {
         //可自助调整超时时间
